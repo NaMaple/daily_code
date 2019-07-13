@@ -13,6 +13,13 @@
  */
 $http = new swoole_http_server("0.0.0.0", 8811);
 
+$http->set(
+    [
+        'enable_static_handler' => true,
+        'document_root' => "/Users/edz/htdocs/daily_code/2019/07/13/static",
+    ]
+);
+
 /**
  * 监听HTTP Server请求
  * $request 请求
