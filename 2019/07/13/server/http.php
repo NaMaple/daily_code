@@ -21,15 +21,18 @@ $http = new swoole_http_server("0.0.0.0", 8811);
 $http->on('request', function ($request, $response) {
     $requestMethod = $request->server['request_method'];
     $response->header("Content-Type", "text/html; charset=utf-8");
+    $response->cookie("key", "value", time()+1800);
     $requestParam = $requestParamFor = $requestMethod=='GET' ? $request->get : $request->post;
     $requestParamStr = "请求的参数：";
-    end($requestParam);
-    $keyLast = key($requestParam);
-    foreach ($requestParamFor as $k=>$v) {
-        if ($keyLast != $k) {
-            $requestParamStr .= "{$k}：{$v}；";
-        } else {
-            $requestParamStr .= "{$k}：{$v}";
+    if ($requestParam) {
+        end($requestParam);
+        $keyLast = key($requestParam);
+        foreach ($requestParamFor as $k=>$v) {
+            if ($keyLast != $k) {
+                $requestParamStr .= "{$k}：{$v}；";
+            } else {
+                $requestParamStr .= "{$k}：{$v}";
+            }
         }
     }
 
