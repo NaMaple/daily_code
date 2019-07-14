@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Web_socket_client_2</title>
+</head>
+<body>
+    <h1>Web_socket_client_2</h1>
+    <script>
+        var wsUrl = "ws://127.0.0.1:9502";
+        var webSocket = new WebSocket(wsUrl);
+
+        //实例化对象的onopen属性
+        webSocket.onopen = function(evt) {
+            webSocket.send("你好啊，服务端，我是客户端2！");
+            console.log('web_socket连接成功');
+        }
+
+        //实例化onmessage
+        webSocket.onmessage = function(evt) {
+            console.log('web_socket返回的数据:' + evt.data);
+        }
+
+        //实例化onclose
+        webSocket.onclose = function(evt) {
+            console.log('web_socket关闭');
+        }
+
+        webSocket.onerror = function(evt) {
+            console.log('web_socket错误' + evt.data);
+        }
+    </script>
+</body>
+</html>
