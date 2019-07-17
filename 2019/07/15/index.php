@@ -60,7 +60,7 @@ $configs = array(
             'name' => "article_title",
 //            'selector' => "//div[contains(@class,'wcommonFeed')]//ul//li[contains(@class,'item    ')]",
 //            'selector' => "//div[contains(@ga_event,'article_title_click')]",
-            'selector' => "//a[contains(@class,'link title')]",
+            'selector' => "//div[@class='title-box']/a",
             'required' => true,
             'repeated' => true
         ),
@@ -72,4 +72,3 @@ $spider->start();
 $spider->on_extract_field = function($fieldname, $data, $page){
     var_dump($data);
 };
-
