@@ -57,6 +57,10 @@ class Ws{
         ];
 //        $ws->task($data);
 
+        /**
+         * 异步定时器
+         * 并不会等定时器执行完毕才执行下一步代码
+         */
         swoole_timer_after(5000, function() use ($ws, $frame) {
             echo "监听事件，延后5s：客户端ID：{$frame->fd}，时间为：".date('H:i:s', time())."\n";
             $ws->push($frame->fd, "定时器5秒后，监听到消息事件，消息内容是: {$frame->data}，时间为：".date('H:i:s', time())."\n");
