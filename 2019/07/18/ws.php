@@ -60,6 +60,7 @@ class Ws{
         /**
          * 异步定时器
          * 并不会等定时器执行完毕才执行下一步代码
+         * 和顺序执行代码有差别
          */
         swoole_timer_after(5000, function() use ($ws, $frame) {
             echo "监听事件，延后5s：客户端ID：{$frame->fd}，时间为：".date('H:i:s', time())."\n";
