@@ -11,11 +11,15 @@
  */
 $process = new swoole_process(function(swoole_process $process){
     echo "不会打印在屏幕中". PHP_EOL;
-    //在进程中启用一个HTTP服务
-
-}, false);
+    //在子进程中启用一个HTTP服务
+    //在Linux中执行PHP
+    //__DIR__ 当前文件所在目录，到文件夹
+    $process->exec('/usr/local/opt/php@7.1/bin/php', [__DIR__.'/../13/server/http.php']);
+}, true);
 
 //启用一个子进程
 $pid = $process->start();
 echo $pid . PHP_EOL;
 
+//回收子进程
+swoole_process::wait();
