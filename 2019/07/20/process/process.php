@@ -16,7 +16,7 @@ $process = new swoole_process(function(swoole_process $process){
     //__DIR__ 当前文件所在目录，到文件夹
 
     $phpPath = '/usr/local/opt/php@7.1/bin/php';
-    $httpPath = __DIR__.'/../13/server/http.php';
+    $httpPath = __DIR__.'/../../13/server/http.php';
     //HTTP启动不来
     $process->exec($phpPath, [$httpPath]);
     echo $httpPath . PHP_EOL;
