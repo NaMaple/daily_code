@@ -30,12 +30,15 @@ for ($i=0; $i<7; $i++) {
     $process = new swoole_process(function (swoole_process $worker) use ($i, $urls) {
         //curl
         $contents = curlData($urls[$i]);
-        echo $contents;
+//        echo $contents;
+        $worker->write($contents);
     }, true);
     $pid = $process->start();
     $workers[$pid] = $process;
 }
 
+//获取管道内容
+//
 foreach ($workers as $worker) {
     echo $worker->read();
 }
