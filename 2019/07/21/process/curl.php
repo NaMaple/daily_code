@@ -38,7 +38,6 @@ for ($i=0; $i<7; $i++) {
 }
 
 //获取管道内容
-//
 foreach ($workers as $worker) {
     echo $worker->read();
 }
