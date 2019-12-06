@@ -1,4 +1,6 @@
 <?php
+    define ('PHP_URL', "/usr/bin/php");
+
     /* process.php就是父进程
      * 创建对象
      *
@@ -16,8 +18,10 @@
         /*
          * 执行外部程序
          * php redis.php
+         * php要安装的绝对路径，可用常量代替
          */
-        $pro->exec();
+        echo PHP_URL . PHP_EOL;
+        $pro->exec(PHP_URL, [__DIR__ . '/../server/http_server.php']);
     }, false);
     /*
      * 创建子进程
@@ -26,3 +30,5 @@
     $pid = $process->start();
     // 打印子进程id
     echo $pid . PHP_EOL;
+
+    swoole_process::wait();
