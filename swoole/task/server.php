@@ -66,7 +66,7 @@
             echo "#### onTask ####".PHP_EOL;
             echo "#{$server->worker_id} onTask: [PID={$server->worker_pid}]: task_id={$task_id}".PHP_EOL;
 
-            //业务代码~/PhpstormProjects/htdocs/daily_code/swoole/task
+            //业务代码
             for($i = 1 ; $i <= 5 ; $i ++ ) {
                 sleep(2);
                 echo "Task {$task_id} 已完成了 {$i}/5 的任务".PHP_EOL;
