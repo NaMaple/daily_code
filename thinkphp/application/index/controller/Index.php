@@ -4,7 +4,7 @@ class Index
 {
     public function index()
     {
-        return  '';
+        return 'http_server加载start.php' . PHP_EOL;
     }
 
     public function singwa() {
