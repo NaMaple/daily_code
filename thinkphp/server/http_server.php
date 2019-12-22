@@ -59,6 +59,10 @@ $http->on('request', function($request, $response) {
         }
     }
 
+    // 清空超全局变量
+    if(!empty($_GET)){
+        unset($_GET);
+    }
     if(isset($request->get)) {
         foreach ($request->get as $k=>$v) {
             $_GET[$k] = $v;
@@ -84,6 +88,7 @@ $http->on('request', function($request, $response) {
     var_dump($res);
     ob_clean();
     $response->end($res);
+    $http->close();
 //    $response->cookie("cookie_key", "cookie_value", time() + 1800);
 
 
