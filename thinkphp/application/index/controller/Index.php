@@ -4,6 +4,7 @@ class Index
 {
     public function index()
     {
+        var_dump($_GET);
         return 'http_server加载start.php' . PHP_EOL;
     }
 
