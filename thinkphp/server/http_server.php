@@ -26,6 +26,7 @@ $http->set(
 /**
  * 通过swoole讲路由导入thinkphp框架
  * workerStart事件回调，此事件在Worker进程/Task进程启动时发生
+ * swoole做http服务器
  */
 $http->on('WorkerStart', function(swoole_server $server, $work_id) {
     // 加载框架引导文件
@@ -35,6 +36,7 @@ $http->on('WorkerStart', function(swoole_server $server, $work_id) {
      * Container::get('app', [defined('APP_PATH') ? APP_PATH : ''])->run()->send();
      * start执行控制器代码，worker进程里没有必要执行。只有热加载一些文件即可
      * 在request里面执行处理http请求的逻辑
+     * 开启多个进程，每个进程载入一个thinkPHP框架
      */
 //    require __DIR__ . '/../thinkphp/start.php';
 });
@@ -59,7 +61,7 @@ $http->on('request', function($request, $response) {
         }
     }
 
-    // 清空超全局变量
+    // 清空超全局变量，sw适配框架
     if(!empty($_GET)){
         unset($_GET);
     }
@@ -78,6 +80,9 @@ $http->on('request', function($request, $response) {
 //    var_dump($request);
 
     ob_start();
+    /**
+     * 常驻内存的坑
+     */
     try {
         think\Container::get('app', [defined('APP_PATH') ? APP_PATH : ''])->run()->send();
     } catch (\Exception $e) {
@@ -88,7 +93,9 @@ $http->on('request', function($request, $response) {
     var_dump($res);
     ob_clean();
     $response->end($res);
-    $http->close();
+
+    // note sw适配框架
+//    $http->close();
 //    $response->cookie("cookie_key", "cookie_value", time() + 1800);
 
 
