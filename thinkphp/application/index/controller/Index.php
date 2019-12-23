@@ -8,13 +8,18 @@ class Index
         return 'http_server加载start.php' . PHP_EOL;
     }
 
-    public function singwa() {
-        echo time();
+    public function set()
+    {
+        var_dump($_GET);
+        var_dump('set');
+        return time();
     }
 
     public function hello($name = 'ThinkPHP5')
     {
-        echo 'hessdggsg' . $name.time();
+        var_dump($_GET);
+        var_dump('hello');
+        return 'hello' . $name . time();
     }
 
 }

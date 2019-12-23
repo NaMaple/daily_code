@@ -720,6 +720,9 @@ class Request
      */
     public function path()
     {
+        /**
+         * 原逻辑path为空走逻辑，如果第一次有值并不会覆盖
+         */
 //        if (is_null($this->path)) {
             $suffix   = $this->config['url_html_suffix'];
             $pathinfo = $this->pathinfo();

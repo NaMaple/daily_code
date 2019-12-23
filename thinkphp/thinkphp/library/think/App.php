@@ -582,6 +582,9 @@ class App extends Container
      */
     public function routeCheck()
     {
+//        $path = $this->request->path();
+//        echo "path:" . $path . PHP_EOL;
+
         // 检测路由缓存
         if (!$this->appDebug && $this->config->get('route_check_cache')) {
             $routeKey = $this->getRouteCacheKey();

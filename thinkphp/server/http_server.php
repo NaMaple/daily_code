@@ -41,6 +41,10 @@ $http->on('WorkerStart', function(swoole_server $server, $work_id) {
 //    require __DIR__ . '/../thinkphp/start.php';
 });
 
+
+
+
+
 $http->on('request', function($request, $response) {
 //    $content = [
 //        'data:' => NOW_TIME,
@@ -48,6 +52,8 @@ $http->on('request', function($request, $response) {
 //        'post:' => $request->post,
 //        'header:' => $request->header,
 //    ];
+
+//    var_dump($request->server);
 
     if(isset($request->server)) {
         foreach ($request->server as $k=>$v) {
@@ -82,6 +88,8 @@ $http->on('request', function($request, $response) {
     ob_start();
     /**
      * 常驻内存的坑
+     * 路由已经找到正确的path_info，但是tp框架走入错误的函数
+     * 不管是index()方法还是set()方法都进入了index()方法，坑
      */
     try {
         think\Container::get('app', [defined('APP_PATH') ? APP_PATH : ''])->run()->send();
@@ -89,17 +97,31 @@ $http->on('request', function($request, $response) {
         //todo 输出业务逻辑
     }
 
+    /**
+     * 查看tp调用的方法
+     * 输出全是走的index()方法
+     * http://127.0.0.1:8811/index/index/set
+     * array(0) { } http_server加载start.php action:index
+     *
+     * http://127.0.0.1:8811/?s=index/index/set
+     * string(3) "set" 1577120198 action:set
+     * s=XX/XX/XX走到set方法
+     *
+     * tp中会把控制器名、类名、方法名放到变量，进程中不会被注销掉
+     */
+    echo PHP_EOL . "action:" . request()->action() . PHP_EOL;
+
     $res = ob_get_contents();
-    var_dump($res);
-    ob_clean();
+    ob_end_clean();
     $response->end($res);
 
-    // note sw适配框架
+    /**
+     * kill掉sw进程，重启一个进程，粗暴的方法
+     */
 //    $http->close();
+
+
 //    $response->cookie("cookie_key", "cookie_value", time() + 1800);
-
-
-
 //    $response->end("end:" . json_encode($request->get));
 });
 
