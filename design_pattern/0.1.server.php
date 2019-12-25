@@ -6,7 +6,6 @@
 
 interface db {
     function connect();
-
 }
 
 /**
@@ -32,8 +31,37 @@ class dbSqlite implements db{
  *
  * 客户端怎么知道这两个类，服务端还是开放的信息太多。知道的越少越好
  */
-$dbM = new dbMysql();
-$dbM->connect();
+//$dbM = new dbMysql();
+//$dbM->connect();
+//
+//$dbS = new dbSqlite();
+//$dbS->connect();
 
-$dbS = new dbSqlite();
-$dbS->connect();
+/**
+ * 简单工厂模式
+ */
+class Factory {
+    public static function createDB($type) {
+        if ($type == 'mysql') {
+            return new dbMysql();
+        } elseif ($type == 'sqlite') {
+            return new dbSqlite();
+        } else {
+            throw new Exception('Error DB Type', 1);
+        }
+    }
+}
+
+/**
+ * 客户端不知道服务器端到底有哪些类，把类名隐藏了
+ * 只知道对方开发了一个Factory::createDB方法
+ * 方法只允许传递数据库名称
+ *
+ * 新增oracle类型，服务端需要修改Factory内容
+ * 在OOD（面向对象思想）中有一个开闭原则，对于修改是封闭的，对于扩展是开放的。
+ * 换一个子类实现
+ */
+
+//$mysql = Factory::createDB('mysql');
+$mysql = Factory::createDB('sqlite');
+$mysql->connect();
