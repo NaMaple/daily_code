@@ -48,12 +48,35 @@ class MTiger extends Tiger {
     }
 }
 
-class Person {
-    public static function sCall(Tiger $animal) {
+class Cat {
+    public function climb()
+    {
+        echo '小猫会爬树' . PHP_EOL;
+    }
+}
+
+/**
+ * Class Person
+ * 参数为老虎对象，参数是小猫对象都可以
+ * 在静态语言中，对象需要明确指明是Tiger或者XTiger、MTiger、Cat，对类型限制严格
+ * 在参数中传递父类Tiger类型，子类表现出MTiger、XTiger特性，称之为多态
+ * 就是一种对象实例的多种表现形式
+ * 在PHP中，不用限制，传小猫都可以，简直是变态。
+ */
+class Person
+{
+    public static function sCall(Tiger $animal)
+    {
         $animal->climb();
     }
 
-    public function call(Tiger $animal) {
+    public function call(Tiger $animal)
+    {
+        $animal->climb();
+    }
+
+    public static function cCall(Cat $animal)
+    {
         $animal->climb();
     }
 }
@@ -64,6 +87,7 @@ class Person {
  */
 Person::sCall(new XTiger());
 Person::sCall(new MTiger());
+Person::cCall(new Cat());
 
 /**
  * 正常方法调用
