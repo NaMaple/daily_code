@@ -1,0 +1,24 @@
+@startuml
+
+interface VehicleInterface {
+    +driveTo(destination)
+}
+
+class Bicycle {
+    +driveTo(destination)
+}
+
+class Scooter {
+    +driveTo(destination)
+}
+
+class ConcreteFactory {
+    -typeList
+    +__construct()
+    +createVehicle(type)
+}
+
+VehicleInterface<|..Bicycle
+VehicleInterface<|..Scooter
+
+@enduml
