@@ -1,11 +1,12 @@
 @startuml
 
 class Singleton {
-    instance
-    __construct()
-    getInstance()
-    __clone()
-    __wakeup()
+    - {static} instance
+
+    + {static} getInstance()
+    - {static} __construct()
+    - __clone()
+    - __wakeup()
 }
 
 
