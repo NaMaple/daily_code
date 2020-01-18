@@ -1,0 +1,11 @@
+@startuml
+
+class Singleton {
+    # {static} $ins
+    + {static} getIns()
+    # {final} __construct()
+    # {final} __clone()
+    # {final} __wakeup()
+}
+
+@enduml
