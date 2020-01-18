@@ -3,13 +3,14 @@
 /**
  * 第一步普通类，外部new
  */
-//class Singleton {
-//
-//}
-//
-//$s1 = new Singleton();
-//$s2 = new Singleton();
-//
+
+class Singleton {
+
+}
+
+$s1 = new Singleton();
+$s2 = new Singleton();
+
 ///**
 // * 两个对象是一个的时候，才全等
 // */
@@ -138,38 +139,38 @@
 /**
  * 第六步，禁止clone
  */
-class Singleton {
-    protected static $ins = null;
-
-    public static function getIns() {
-        // 做判断，防止重复new
-        if (self::$ins == null) {
-            // new 自己，自身类实例化
-            // 将对象赋值给静态属性
-            self::$ins = new self();
-        }
-        return self::$ins;
-
-
-    }
-
-    // 方法前加final，则方法不能被覆盖；
-    // 类前加final，则类不能被继承
-    final protected function __construct() {}
-
-    // 封锁clone
-    final protected function __clone() {}
-}
-
-$s1 = Singleton::getIns();
-// 被克隆了，又产生了多个对象
-$s2 = clone $s1;
-
-/**
- * 两个对象是一个的时候，才全等
- */
-if ($s1 === $s2) {
-    echo '是一个对象' . PHP_EOL;
-} else {
-    echo '不是一个对象' . PHP_EOL;
-}
+//class Singleton {
+//    protected static $ins = null;
+//
+//    public static function getIns() {
+//        // 做判断，防止重复new
+//        if (self::$ins == null) {
+//            // new 自己，自身类实例化
+//            // 将对象赋值给静态属性
+//            self::$ins = new self();
+//        }
+//        return self::$ins;
+//
+//
+//    }
+//
+//    // 方法前加final，则方法不能被覆盖；
+//    // 类前加final，则类不能被继承
+//    final protected function __construct() {}
+//
+//    // 封锁clone
+//    final protected function __clone() {}
+//}
+//
+//$s1 = Singleton::getIns();
+//// 被克隆了，又产生了多个对象
+//$s2 = clone $s1;
+//
+///**
+// * 两个对象是一个的时候，才全等
+// */
+//if ($s1 === $s2) {
+//    echo '是一个对象' . PHP_EOL;
+//} else {
+//    echo '不是一个对象' . PHP_EOL;
+//}
