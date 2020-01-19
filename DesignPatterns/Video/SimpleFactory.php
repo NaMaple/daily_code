@@ -28,17 +28,6 @@ class dbSqlite implements db{
 
 
 
-
-/**
- * 客户端开发，看不到dbMysql、dbSqlite细节，只知道这两个类实现了DB接口
- * 客户端怎么知道这两个类，服务端还是开放的信息太多。知道的越少越好
- */
-//$dbM = new dbMysql();
-//$dbM->connect();
-//
-//$dbS = new dbSqlite();
-//$dbS->connect();
-
 /**
  * 简单工厂模式
  */
@@ -64,6 +53,7 @@ class Factory {
  * 换一个子类实现
  */
 
-//$mysql = Factory::createDB('mysql');
-$mysql = Factory::createDB('sqlite');
+$mysql = Factory::createDB('mysql');
 $mysql->connect();
+$sqlite = Factory::createDB('sqlite');
+$sqlite->connect();
