@@ -11,7 +11,7 @@
  *
  * 动态语言与静态语言
  * 静态语言（强类型语言）：静态语言是在编译时变量的数据类型即可确定的语言，多数静态类型语言要求在使用变量之前必须声明数据类型。
- * Java、C/C++
+ * Java；C/C++
  * 动态语言（弱类型语言）：动态语言是在运行时确定数据类型的语言。变量使用之前不需要类型声明，通常变量的类型是被赋值的那个值的类型。
  * PHP、Python
  *
@@ -26,22 +26,14 @@ abstract class Tiger {
     public abstract function climb();
 }
 
-/**
- * Class XTiger
- * 继承Tiger，表现为不会爬树
- */
-class XTiger extends Tiger {
+class XblyTiger extends Tiger {
     public function climb()
     {
         echo '西伯利亚虎不会爬树' . PHP_EOL;
     }
 }
 
-/**
- * Class MTiger
- * 继承Tiger，表现为会爬树
- */
-class MTiger extends Tiger {
+class MjlTiger extends Tiger {
     public function climb()
     {
         echo '孟加拉虎会爬树' . PHP_EOL;
@@ -51,47 +43,23 @@ class MTiger extends Tiger {
 class Cat {
     public function climb()
     {
-        echo '小猫会爬树' . PHP_EOL;
+        echo '猫会爬树' . PHP_EOL;
     }
 }
 
 /**
- * Class Person
- * 参数为老虎对象，参数是小猫对象都可以
- * 在静态语言中，对象需要明确指明是Tiger或者XTiger、MTiger、Cat，对类型限制严格
- * 在参数中传递父类Tiger类型，子类表现出MTiger、XTiger特性，称之为多态
- * 就是一种对象实例的多种表现形式
- * 在PHP中，不用限制，传小猫都可以，简直是变态。
+ * 驯兽师类
+ * 类名重复，todo 怎么解决
  */
-class Person
-{
-    public static function sCall(Tiger $animal)
-    {
-        $animal->climb();
-    }
-
-    public function call(Tiger $animal)
-    {
-        $animal->climb();
-    }
-
-    public static function cCall(Cat $animal)
-    {
+class Trainer {
+    // 传参，参数为对象
+    public static function call(Tiger $animal) {
+//        var_dump($animal);
         $animal->climb();
     }
 }
 
-/**
- * 驯兽师叫老虎爬树
- * 静态方法可以直接调用，不用实例化对象
- */
-Person::sCall(new XTiger());
-Person::sCall(new MTiger());
-Person::cCall(new Cat());
-
-/**
- * 正常方法调用
- */
-$person = new Person();
-$person->call(new XTiger());
-$person->call(new MTiger());
+// 传参为对象
+$t1 = Trainer::call(new XblyTiger());
+$t2 = Trainer::call(new MjlTiger());
+//$t3 = Trainer::call(new Cat());
