@@ -11,5 +11,5 @@ $log = new Logger('Redis');
 $log->pushHandler(new StreamHandler(__DIR__ . '.redis.log', Logger::WARNING));
 
 // add records to the log
-$log->warning('redis','ip err');
-$log->error('Bar');
+$log->warning('redis_warning');
+$log->error('redis_error');
